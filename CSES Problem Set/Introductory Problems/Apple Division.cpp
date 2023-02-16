@@ -1,54 +1,25 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
 
-    long long int minimalDifference = 1e9ll;
-    bool minDifZero = false;
+	int n; cin >> n; long long int res = LLONG_MAX;
+	vector<long long int> a(n); for (long long int &x : a) cin >> x;
 
-    int n;
-    vector<int> apples(n);
+	for (int i = 1; i < (1 << n); i++) {
+		long long int ret1 = 0;
+		long long int ret2 = 0;
 
-    cin >> n;
+		for (int j = 0; j < n; j++) {
+			if ((i >> j) & 1) ret1 += a[j];
+			else ret2 += a[j];
+		}
 
-    for (int i = 0; i < n; i++) {
-        cin >> apples[n];
-    }
+		res = min(res, abs(ret1 - ret2));
+	}
 
-    int index = 1;
-
-    while (!minDifZero) {
-        if (index == n) {
-            break;
-        }
-
-        long long int group1 = 0ll;
-        long long int group2 = 0ll;
-
-        for (int i = 0; i < index; i++) {
-            group1 += apples[i];
-        }
-
-        for (int i = index; i < n; i++) {
-            group2 += apples[i];
-        }
-
-        minimalDifference = min(minimalDifference, max(group1 - group2, group2 - group1));
-
-        if (minimalDifference == 0) {
-            minDifZero = true;
-        }
-
-        index++;
-    }
-
-    cout << minimalDifference << "\n";
-
-    return 0;
+	cout << res << "\n";
+	return 0;
 }
