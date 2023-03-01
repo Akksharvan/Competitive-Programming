@@ -1,27 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool consistent (vector<string> &inputs, vector<int> &outputs) {
-	vector<bool> bits((int) inputs[0].size());
-	vector<bool> ignore((int) inputs.size());
+bool foo (vector<string> &I, vector<int> &O) {
+	vector<bool> B((int) I[0].size());
+	vector<bool> IGN((int) I.size());
 
-	for (int i = 0; i < (int) inputs.size(); i++) {
-		for (int j = 0; j < (int) inputs[i].size(); j++) {
-			if (!ignore[i]) {
-				bool if_found = true;
+	for (int i = 0; i < (int) I.size(); i++) {
+		for (int j = 0; j < (int) I[i].size(); j++) {
+			if (!IGN[i]) {
+				bool G = 1;
 
-				for (int k = 0; k < (int) inputs.size(); k++) {
-					if (!ignore[k]) {
-						if (inputs[i][j] == inputs[k][j] && outputs[i] != outputs[k]) {
-							if_found = false;
+				for (int k = 0; k < (int) I.size(); k++) {
+					if (!IGN[k]) {
+						if (I[i][j] == I[k][j] && O[i] != O[k]) {
+							G = false;
 							break;
 						}
 					}
 				}
 
-				if (if_found) {
-					for (int k = 0; k < (int) inputs.size(); k++) {
-						if (!ignore[k] && inputs[k][j] == inputs[i][j]) ignore[k] = 1;
+				if (G) {
+					for (int k = 0; k < (int) I.size(); k++) {
+						if (!IGN[k] && I[k][j] == I[i][j]) IGN[k] = 1;
 					}
 
 					i = 0; j = -1;
@@ -30,11 +30,8 @@ bool consistent (vector<string> &inputs, vector<int> &outputs) {
 		}
 	}
 
-	for (const bool &ign : ignore) {
-		if (!ign) return false;
-	}
-	
-	return true;
+	for (const bool &ign : IGN) if (!ign) return 0;
+	return 1;
 }
 
 int main() {
@@ -48,11 +45,11 @@ int main() {
 		int N, M;
 		cin >> N >> M;
 
-		vector<string> inputs(M);
-		vector<int> outputs(M);
+		vector<string> I(M);
+		vector<int> O(M);
 
-		for (int i = 0; i < M; i++) cin >> inputs[i] >> outputs[i];
-		bool ok = consistent(inputs, outputs);
+		for (int i = 0; i < M; i++) cin >> I[i] >> O[i];
+		bool ok = foo(I, O);
 
 		if (ok) cout << "OK" << "\n";
 		else cout << "LIE" << "\n";
