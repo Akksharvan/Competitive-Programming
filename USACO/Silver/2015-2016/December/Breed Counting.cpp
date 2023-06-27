@@ -1,47 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define sz(x) ((int) x.size())
-#define nl "\n"
-#define spc " "
-
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
 	freopen("bcount.in", "r", stdin);
 	freopen("bcount.out", "w", stdout);
 
-	int N, Q;
-	cin >> N >> Q;
+	int N, Q; cin >> N >> Q;
+	vector<int> A(N); for (int &i : A) cin >> i;
 
-	vector<int> cows(N);
-	for (int &cow : cows) cin >> cow;
-
-	vector<vector<int>> cows_prefix(4, vector<int> (N + 1));
-	for (int i = 1; i <= 3; i++) {
+	vector<vector<int>> DP(3, vector<int> (N + 1));
+	for (int i = 0; i < 3; i++) {
 		for (int j = 1; j <= N; j++) {
-			cows_prefix[i][j] = cows_prefix[i][j - 1] + (cows[j - 1] == i);
+			DP[i][j] = DP[i][j - 1] + (A[j - 1] == (i + 1));
 		}
 	}
 
-	while (Q--) {
-		int a, b, H, G, J;
-		cin >> a >> b;
-
-		for (int i = 1; i <= 3; i++) {
-			if (i == 1) {
-				H = cows_prefix[i][b] - cows_prefix[i][a - 1];
-			}
-			else if (i == 2) {
-				G = cows_prefix[i][b] - cows_prefix[i][a - 1];
-			}
-			else {
-				J = cows_prefix[i][b] - cows_prefix[i][a - 1];
-			}
-		}
-
-		cout << H << spc << G << spc << J << nl;
+	for (int q = 0; q < Q; q++) {
+		int A, B; cin >> A >> B;
+		cout << (DP[0][B] - DP[0][A - 1]) << " ";
+		cout << (DP[1][B] - DP[1][A - 1]) << " ";
+		cout << (DP[2][B] - DP[2][A - 1]) << "\n";
 	}
 
 	return 0;
