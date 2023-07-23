@@ -1,2 +1,0 @@
-#include <iostream>
-int main() { long long int n; std::cin >> n; std::cout << (n == 1 ? 1 : (n == 2 ? 2 : (n == 3 ? 6 : ((n % 2) ? (n * (n - 1) * (n - 2)) : ((n % 3) ? (n * (n - 1) * (n - 3)) : ((n - 1) * (n - 2) * (n - 3))))))) << "\n"; return 0;}
