@@ -17,26 +17,6 @@ void solve () {
 		if (T == "intransitive-verb") A[3].push_back(S + " ");
 	}
 
-	// cerr << "Nouns : " << size(A[0]) << "\n";
-	// for (string &i : A[0]) cerr << i << "\n";
-
-	// cerr << "\n";
-
-	// cerr << "Conjunctions : " << size(A[1]) << "\n";
-	// for (string &i : A[1]) cerr << i << "\n";
-
-	// cerr << "\n";
-
-	// cerr << "Transitive Verbs : " << size(A[2]) << "\n";
-	// for (string &i : A[2]) cerr << i << "\n";
-
-	// cerr << "\n";
-
-	// cerr << "Intransitive Verbs : " << size(A[3]) << "\n";
-	// for (string &i : A[3]) cerr << i << "\n";
-
-	// cerr << "\n";
-
 	while (!A[3].empty()) {
 		if (A[0].empty()) break; vector<string> S;
 
