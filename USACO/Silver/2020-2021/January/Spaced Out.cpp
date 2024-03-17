@@ -1,27 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define nl "\n"
-#define spc " "
-#define sz(x) ((int) x.size())
-
-array<array<int, (int) 1e3>, (int) 1e3> pasture;
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-	int N;
-	cin >> N;
+    int N; cin >> N; vector<vector<int>> A(N, vector<int> (N));
+    for (auto &i : A) for (auto &j : i) cin >> j;
 
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			cin >> p[i][j];
-		}
-	}
+    int R1 = 0, R2 = 0;
 
-	long long int answer_one = 0, answer_two = 0;
-	for (int x = 0; x < N; x++) {
-		for (int y = 0; y <)
-	}
-	return 0;
+    vector<vector<int>> S1(N, vector<int>(2));
+    vector<vector<int>> S2(N, vector<int>(2));
+
+    for (int i = 0; i < N; i++) for (int j = 0; j < N; j++) S1[i][j % 2] += A[i][j];
+    for (int i = 0; i < N; i++) for (int j = 0; j < N; j++) S2[j][i % 2] += A[i][j];
+
+    for (int i = 0; i < N; i++) R1 += max(S1[i][0], S1[i][1]);
+    for (int i = 0; i < N; i++) R2 += max(S2[i][0], S2[i][1]);
+
+    cout << max(R1, R2) << "\n";
+    return 0;
 }
