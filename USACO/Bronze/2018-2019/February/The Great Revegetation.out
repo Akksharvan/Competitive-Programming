@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    freopen("revegetate.in", "r", stdin);
+    freopen("revegetate.out", "w", stdout);
+
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int N, M; cin >> N >> M; vector<set<int>> A(N + 1); vector<int> R(N + 1);
+    for (int i = 0; i < M; i++) { int U, V; cin >> U >> V; A[U].insert(V); A[V].insert(U); }
+
+    for (int i = 1; i <= N; i++) {
+        set<int> C = {1, 2, 3, 4};
+        for (auto &j : A[i]) C.erase(R[j]);
+
+        R[i] = *begin(C);
+    }
+
+    for (int i = 1; i <= N; i++) cout << R[i];
+    cout << "\n"; return 0;
+}
